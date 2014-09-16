@@ -1,24 +1,36 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
-  config.vm.define "ubuntu" do |u|
-    u.vm.box = "hashicorp/precise64"
-    u.vm.provision "shell", :path => "ubuntu.sh"
+
+  config.vm.define "centos" do |v|
+    v.vm.box = "chef/centos-6.5"
+    v.vm.provision "shell", :path => "centos.sh"
   end
 
-  config.vm.define "centos" do |c|
-    c.vm.box = "chef/centos-6.5"
-    c.vm.provision "shell", :path => "centos.sh"
+  config.vm.define "debian" do |v|
+    v.vm.box = "debian-7.5-64"
+    v.vm.provision "shell", :path => "debian.sh"
   end
 
+  config.vm.define "mac" do |v|
+    v.vm.box = "mac-osx-10.9"
+    v.vm.provision "shell", :path => "macosx.sh"
+  end
+
+  config.vm.define "ubuntu" do |v|
+    v.vm.box = "hashicorp/precise64"
+    v.vm.provision "shell", :path => "ubuntu.sh"
+  end
+
+  config.vm.define "windows" do |v|
+    v.vm.box = "win_7_x64_eng"
+    v.vm.communicator = "winrm"
+    v.vm.network "forwarded_port", guest: 3389, host: 3389
+  end
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -28,7 +40,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
