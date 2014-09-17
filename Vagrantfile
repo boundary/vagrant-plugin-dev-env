@@ -6,36 +6,75 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
-  config.vm.define "centos" do |v|
+  #
+  # Centos
+  #
+  config.vm.define "centos-6.5" do |v|
     v.vm.box = "chef/centos-6.5"
+    v.vm.box_url = "https://vagrantcloud.com/chef/centos-6.5"
+    v.vm.hostname = "boundary-plugin-dev-centos-6-5"
     v.vm.provision "shell", :path => "centos.sh"
+    v.vm.post_up_message = "TO LOGIN: vagrant ssh centos-6.5"
   end
 
-  config.vm.define "debian" do |v|
-    v.vm.box = "debian-7.5-64"
+  config.vm.define "centos-7.0" do |v|
+    v.vm.box = "chef/centos-7.0"
+    v.vm.box_url = "https://vagrantcloud.com/chef/centos-7.0"
+    v.vm.hostname = "boundary-plugin-dev-centos-7-0"
+    v.vm.provision "shell", :path => "centos.sh"
+    v.vm.post_up_message = "TO LOGIN: vagrant ssh centos-7.0"
+  end
+
+  #
+  # Debian
+  #
+  config.vm.define "debian-7.6" do |v|
+    v.vm.box = "chef/debian-7.6"
+    v.vm.box_url = "https://vagrantcloud.com/chef/boxes/debian-7.6"
     v.vm.provision "shell", :path => "debian.sh"
   end
 
+  #
+  # RedHat
+  #
+  config.vm.define "fedora-19" do |v|
+    v.vm.box = "chef/fedora-19"
+    v.vm.box_url = "https://vagrantcloud.com/chef/boxes/fedora-19"
+    v.vm.provision "shell", :path => "fedora.sh"
+  end
+
+  config.vm.define "fedora-20" do |v|
+    v.vm.box = "chef/fedora-20"
+    v.vm.box_url = "https://vagrantcloud.com/chef/boxes/fedora-20"
+    v.vm.provision "shell", :path => "fedora.sh"
+  end
+
+  #
+  # Mac OS X
+  #
   config.vm.define "mac" do |v|
     v.vm.box = "mac-osx-10.9"
+    v.vm.box_url = "https://vagrantcloud.com/stopiccot/boxes/osx-10.9"
     v.vm.provision "shell", :path => "macosx.sh"
   end
 
-  config.vm.define "ubuntu" do |v|
+  #
+  # Ubuntu
+  #
+  config.vm.define "ubuntu-12.04" do |v|
     v.vm.box = "hashicorp/precise64"
     v.vm.provision "shell", :path => "ubuntu.sh"
+    v.vm.post_up_message = "Run vagrant ssh ubuntu-12.04 to login"
   end
 
+  #
+  # Windows
+  #
   config.vm.define "windows" do |v|
     v.vm.box = "win_7_x64_eng"
     v.vm.communicator = "winrm"
     v.vm.network "forwarded_port", guest: 3389, host: 3389
   end
-
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
