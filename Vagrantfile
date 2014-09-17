@@ -70,7 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # Windows
   #
-  config.vm.define "windows" do |v|
+  config.vm.define "windows-7" do |v|
     v.vm.box = "win_7_x64_eng"
     v.vm.communicator = "winrm"
     v.vm.network "forwarded_port", guest: 3389, host: 3389
