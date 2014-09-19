@@ -72,6 +72,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.define "windows-7" do |v|
     v.vm.box = "win_7_x64_eng"
+    # Name shortened due to limitation of Windows
+    v.vm.hostname = "plugin-win-7"
+    v.vm.communicator = "winrm"
+    v.vm.network "forwarded_port", guest: 3389, host: 3389
+  end
+
+  config.vm.define "windows-2012-standard" do |v|
+    v.vm.box = "opentable/win-2012-standard-amd64-nocm"
+    # Name shortened due to limitation of Windows
+    v.vm.hostname = "p-win-2012-stan"
     v.vm.communicator = "winrm"
     v.vm.network "forwarded_port", guest: 3389, host: 3389
   end
