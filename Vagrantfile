@@ -63,6 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   config.vm.define "ubuntu-12.04" do |v|
     v.vm.box = "hashicorp/precise64"
+    v.vm.hostname = "ubuntu-12.04"
     v.vm.provision "shell", :path => "ubuntu.sh"
     v.vm.post_up_message = "Run vagrant ssh ubuntu-12.04 to login"
   end
