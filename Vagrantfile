@@ -9,6 +9,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # Centos
   #
+  config.vm.define "centos-5.5" do |v|
+    v.vm.box = "hansode/centos-5.5-x86_64"
+    v.vm.box_url = "https://vagrantcloud.com/hansode/boxes/centos-5.5-x86_64"
+    v.vm.hostname = "boundary-plugin-dev-centos-5-5"
+    v.vm.provision "shell", :path => "centos.sh"
+    v.vm.post_up_message = "TO LOGIN: vagrant ssh centos-5.5"
+  end
+
+  config.vm.define "centos-5.8" do |v|
+    v.vm.box = "altenwald/centos-5.8-puppet"
+    v.vm.box_url = "https://vagrantcloud.com/altenwald/boxes/centos-5.8-puppet"
+    v.vm.hostname = "boundary-plugin-dev-centos-5-8"
+    v.vm.provision "shell", :path => "centos.sh"
+    v.vm.post_up_message = "TO LOGIN: vagrant ssh centos-5.8"
+  end
+
+  config.vm.define "centos-5.10" do |v|
+    v.vm.box = "chef/centos-5.10"
+    v.vm.box_url = "https://vagrantcloud.com/chef/boxes/centos-5.10"
+    v.vm.hostname = "boundary-plugin-dev-centos-5-10"
+    v.vm.provision "shell", :path => "centos.sh"
+    v.vm.post_up_message = "TO LOGIN: vagrant ssh centos-5.10"
+  end
+
   config.vm.define "centos-6.5" do |v|
     v.vm.box = "chef/centos-6.5"
     v.vm.box_url = "https://vagrantcloud.com/chef/centos-6.5"
