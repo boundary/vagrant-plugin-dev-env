@@ -92,6 +92,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vm.post_up_message = "Run vagrant ssh ubuntu-12.04 to login"
   end
 
+  config.vm.define "ubuntu-12.10" do |v|
+    v.vm.box = "chef/ubuntu-12.10"
+    v.vm.hostname = "ubuntu-12.10"
+    v.vm.provision "shell", :path => "ubuntu.sh"
+    v.vm.post_up_message = "Run vagrant ssh ubuntu-12.10 to login"
+  end
+
+  config.vm.define "ubuntu-14.04" do |v|
+    v.vm.box = "ubuntu/trusty64"
+    v.vm.hostname = "ubuntu-14.04"
+    v.vm.provision "shell", :path => "ubuntu.sh"
+    v.vm.post_up_message = "Run vagrant ssh ubuntu-14.04 to login"
+  end
+
   #
   # Windows
   #
